@@ -1,11 +1,11 @@
 import React from 'react'
 import Index from '../../../src/pages/index/index'
-import { act, render } from 'taro-testing-library'
+import { shallow } from 'enzyme';
 
-test('should render component', () => {
-  const { container, debug } = render(<Index />)
-  debug()
-  const helloWorld = container.querySelector('.index')
+test('should render our first component', () => {
+  const wrapper = shallow(<Index />)
 
-  expect(helloWorld.innerHTML).toEqual('Hello world!');
+  const helloWorld = wrapper.find('.hello-world')
+
+  expect(helloWorld.text()).toEqual('Hello world!');
 });
