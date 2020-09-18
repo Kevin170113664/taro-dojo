@@ -6,19 +6,14 @@ import './index.less'
 
 export default class Index extends Component {
   render () {
-    if (this.props.theme === 'light') {
-      return (
-        <View className='index'>
-          <Text className='hello-world'>Hello world!</Text>
-          <AtButton type='secondary'>Light Theme</AtButton>
-        </View>
-      )
-    }
+    const button = this.props.theme === 'light'
+      ? <AtButton type='secondary'>Light Theme</AtButton>
+      : <AtButton type='primary'>Default Theme</AtButton>
 
     return (
       <View className='index'>
         <Text className='hello-world'>Hello world!</Text>
-        <AtButton type='primary'>Default Theme</AtButton>
+        {button}
       </View>
     )
   }
