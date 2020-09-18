@@ -2,6 +2,15 @@ import React from 'react'
 import Index from '../../../src/pages/index/index'
 import {shallow} from 'enzyme';
 
+jest.mock('@tarojs/taro', () => ({
+  request: () => new Promise((resolve) => resolve({data: {Website: 'fake response'}})),
+  getEnv: () => 'env'
+}))
+
+const delay = async (ms = 50) => {
+  return new Promise((resolve) => setTimeout(() => resolve(), ms))
+}
+
 describe('Index Component', () => {
   test('should be able to render Index component', () => {
     const wrapper = shallow(<Index/>)
@@ -21,13 +30,15 @@ describe('Index Component', () => {
     expect(button.props().type).toEqual('secondary');
   });
 
-  test('should be able to fire a request', () => {
+  test('should be able to fire a request', async () => {
     const wrapper = shallow(<Index/>)
 
     const button = wrapper.find('AtButton')
     button.simulate('click')
-    const textView = wrapper.find('hello-world')
+    await delay()
+    wrapper.update()
+    const textView = wrapper.find('.hello-world')
 
-    expect(textView.props().children).toEqual('...');
+    expect(textView.props().children).toEqual('fake response');
   });
 })
