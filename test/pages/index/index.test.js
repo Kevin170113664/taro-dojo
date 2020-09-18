@@ -9,7 +9,7 @@ describe('Index Component', () => {
     const helloWorld = wrapper.find('.hello-world')
     const button = wrapper.find('AtButton')
 
-    expect(helloWorld.text()).toEqual('Hello world!');
+    expect(helloWorld.text()).toEqual('Hello World!');
     expect(button.props().type).toEqual('primary');
   });
 

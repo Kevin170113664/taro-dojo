@@ -9,7 +9,7 @@ export default class Experiment extends Component {
 
     return (
       <View className='index'>
-        <AtButton className="notification" type="secondary" onClick={handleClick}>点我会显示通知</AtButton>
+        <AtButton className="notification" type="secondary" onClick={handleClick}>点击显示通知</AtButton>
       </View>
     )
   }
