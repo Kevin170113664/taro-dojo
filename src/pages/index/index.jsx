@@ -24,9 +24,8 @@ export default class Index extends Component {
   render() {
     const {theme} = this.props
 
-    const button = theme === 'light'
-      ? <AtButton type='secondary' onClick={this.handleRequest.bind(this)}>点击发送请求</AtButton>
-      : <AtButton type='primary' onClick={this.handleRequest.bind(this)}>点击发送请求</AtButton>
+    const type = theme === 'light' ? 'secondary' : 'primary'
+    const button = <AtButton type={type} onClick={this.handleRequest.bind(this)}>点击发送请求</AtButton>
 
     return (
       <View className='index'>
