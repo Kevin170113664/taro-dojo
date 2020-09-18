@@ -7,22 +7,32 @@ import Experiment from './experiment';
 import './index.less'
 
 export default class Index extends Component {
+  state = {
+    text: 'Hello World!'
+  }
+
   handleClick(type) {
     Taro.atMessage({type, message: '哟，这是一条消息'})
   }
 
+  async handleRequest() {
+    const url = 'https://api.jikan.moe/v3'
+    const response = await Taro.request({url})
+    this.setState({text: response.data.Website})
+  }
+
   render() {
-    const {onButtonClick, theme} = this.props
+    const {theme} = this.props
 
     const button = theme === 'light'
-      ? <AtButton type='secondary' onClick={onButtonClick}>Light Theme</AtButton>
-      : <AtButton type='primary' onClick={onButtonClick}>Default Theme</AtButton>
+      ? <AtButton type='secondary' onClick={this.handleRequest.bind(this)}>点击发送请求</AtButton>
+      : <AtButton type='primary' onClick={this.handleRequest.bind(this)}>点击发送请求</AtButton>
 
     return (
       <View className='index'>
         <AtMessage/>
-        <Text className='hello-world'>Hello world!</Text>
         {button}
+        <Text className='hello-world'>{this.state.text}</Text>
         <Experiment handleClick={this.handleClick.bind(this)}/>
       </View>
     )
@@ -31,5 +41,4 @@ export default class Index extends Component {
 
 Index.propTypes = {
   theme: PropTypes.string,
-  onButtonClick: PropTypes.func
 }
