@@ -6,9 +6,11 @@ import './index.less'
 
 export default class Index extends Component {
   render () {
-    const button = this.props.theme === 'light'
-      ? <AtButton type='secondary'>Light Theme</AtButton>
-      : <AtButton type='primary'>Default Theme</AtButton>
+    const { onButtonClick, theme } = this.props
+
+    const button = theme === 'light'
+      ? <AtButton type='secondary' onClick={onButtonClick}>Light Theme</AtButton>
+      : <AtButton type='primary' onClick={onButtonClick}>Default Theme</AtButton>
 
     return (
       <View className='index'>
@@ -20,5 +22,6 @@ export default class Index extends Component {
 }
 
 Index.propTypes = {
-  theme: PropTypes.string
+  theme: PropTypes.string,
+  onButtonClick: PropTypes.any
 }

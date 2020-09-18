@@ -14,10 +14,20 @@ describe('Index Component', () => {
   });
 
   test('should be able to render light theme', () => {
-    const wrapper = shallow(<Index theme="light"/>)
+    const wrapper = shallow(<Index theme="light" />)
 
     const button = wrapper.find('AtButton')
 
     expect(button.props().type).toEqual('secondary');
+  });
+
+  test('should be able to trigger button click event', () => {
+    const onButtonClick = jest.fn()
+    const wrapper = shallow(<Index onButtonClick={onButtonClick}/>)
+
+    const button = wrapper.find('AtButton')
+    button.simulate('click')
+
+    expect(onButtonClick).toBeCalled();
   });
 })
